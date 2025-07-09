@@ -6,7 +6,7 @@ export const fetchUsers = async (req, res) => {
       post: {
         select: {
           title: true,
-          comment: true,
+          comment_count: true,
         },
       },
     },
