@@ -35,9 +35,12 @@ model Post {
 }
 
 model Comment {
-  id      String @id @default(uuid())
-  post    Post   @relation(fields: [post_id], references: [id], onDelete: Cascade)
-  post_id Int
-  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id Int
+  id         String   @id @default(uuid())
+  post       Post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  post_id    Int
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id    Int
+  comment    String
+  created_at DateTime @default(now())
+  updated_at  DateTime @updatedAt @default(now())
 }
