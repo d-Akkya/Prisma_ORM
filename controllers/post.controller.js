@@ -2,7 +2,20 @@ import prisma from "../DB/db.config.js";
 
 export const fetchPosts = async (req, res) => {
   try {
-    const posts = await prisma.post.findMany({});
+    const posts = await prisma.post.findMany({
+      include: {
+        comment: {
+          select: {
+            comment: true,
+            user: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+      },
+    });
     return res.status(200).json({
       posts,
       message: "All posts have been fetched.",
