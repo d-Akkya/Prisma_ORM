@@ -1,7 +1,11 @@
 import prisma from "../DB/db.config.js";
 
 export const fetchUsers = async (req, res) => {
-  const users = await prisma.user.findMany({});
+  const users = await prisma.user.findMany({
+    include: {
+      post: true,
+    },
+  });
 
   return res.status(200).json({
     users,
