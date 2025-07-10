@@ -165,3 +165,17 @@ export const deletePost = async (req, res) => {
     });
   }
 };
+
+// To Search the post
+export const searchPost = async (req, res) => {
+  const searchQuery = req.query.q;
+  const post = await prisma.post.findMany({
+    where: {
+      description: {
+        search: searchQuery,
+      },
+    },
+  });
+
+  return res.status(200).json({ post });
+};
