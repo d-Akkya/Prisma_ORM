@@ -15,9 +15,14 @@ export const fetchPosts = async (_, res) => {
           },
         },
       },
-      orderBy:{
-        id: 'dsc'
-      }
+      orderBy: {
+        id: "desc",
+      },
+      where: {
+        comment_count: {
+          gt: 2,
+        },
+      },
     });
     return res.status(200).json({
       posts,
