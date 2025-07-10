@@ -19,8 +19,29 @@ export const fetchPosts = async (_, res) => {
         id: "desc",
       },
       where: {
-        comment_count: {
-          gt: 2,
+        OR: [
+          {
+            title: {
+              startsWith: "Blog",
+            },
+          },
+          {
+            title: {
+              endsWith: "Tutorial",
+            },
+          },
+        ],
+        AND: [
+          {
+            comment_count: {
+              gte: 0,
+            },
+          },
+        ],
+        NOT: {
+          title: {
+            contains: "Tutorial",
+          },
         },
       },
     });
