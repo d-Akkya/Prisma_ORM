@@ -2,7 +2,16 @@ import prisma from "../DB/db.config.js";
 
 export const fetchComments = async (req, res) => {
   try {
-    const comments = await prisma.comment.findMany({});
+    const comments = await prisma.comment.findMany({
+      include: {
+        user: true,
+        post: {
+          select: {
+            user: true,
+          },
+        },
+      },
+    });
     return res.status(200).json({
       comments,
       message: "All comments have been fetched.",
@@ -119,7 +128,7 @@ export const deleteComment = async (req, res) => {
     const commentId = req.params.id;
 
     const post_id = req.body;
-    console.log(post_id)
+    console.log(post_id);
 
     // Decrease the comment counter
     await prisma.post.update({
