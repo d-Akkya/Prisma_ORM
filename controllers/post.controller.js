@@ -1,6 +1,6 @@
 import prisma from "../DB/db.config.js";
 
-export const fetchPosts = async (req, res) => {
+export const fetchPosts = async (_, res) => {
   try {
     const posts = await prisma.post.findMany({
       include: {
@@ -15,6 +15,9 @@ export const fetchPosts = async (req, res) => {
           },
         },
       },
+      orderBy:{
+        id: 'dsc'
+      }
     });
     return res.status(200).json({
       posts,
