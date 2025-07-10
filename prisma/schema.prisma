@@ -5,7 +5,8 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearchPostgres"]
 }
 
 datasource db {
@@ -42,5 +43,5 @@ model Comment {
   user_id    Int
   comment    String
   created_at DateTime @default(now())
-  updated_at  DateTime @updatedAt @default(now())
+  updated_at DateTime @default(now()) @updatedAt
 }
